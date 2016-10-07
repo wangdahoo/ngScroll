@@ -1,0 +1,14 @@
+{
+  "name": "ng-scroll",
+  "homepage": "https://github.com/wangdahoo/ng-scroll",
+  "authors": [
+    "wangdahoo <157195705@qq.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "angular": "^1.5.8"
+  }
+}
