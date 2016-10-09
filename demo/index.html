@@ -3,8 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no">
-    <script src="../bower_components/angular/angular.min.js" charset="utf-8"></script>
     <title>angular-scroll demo</title>
+
+    <link rel="stylesheet" href="../src/css/scroller.css"/>
 
     <style>
       .item {
@@ -15,12 +16,13 @@
     </style>
   </head>
   <body ng-controller="mainController">
-    <scroll>
+    <scroller>
       <div class="item" ng-repeat="it in items">
         {{ it }}
       </div>
-    </scroll>
+    </scroller>
 
+    <script src="../bower_components/angular/angular.min.js" charset="utf-8"></script>
     <script src="../src/module/render.js"></script>
     <script src="../src/module/core.js"></script>
     <script src="../src/module/accessor.js"></script>
