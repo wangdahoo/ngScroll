@@ -1,10 +1,9 @@
 ;
 (function (window, angular) {
-  angular
 
-    .module('ngScroll', [])
+  /* ngTouch */
+  angular.module('ngTouch', [])
 
-    /* ngTouchstart, ngTouchend, ngTouchmove */
     .directive("ngTouchstart", function () {
       return {
         controller: ["$scope", "$element", function ($scope, $element) {
@@ -62,6 +61,12 @@
       }
     })
 
+  ;
+
+
+  /* ngScroll */
+  angular.module('ngScroll', ['ngTouch'])
+
     .directive('spinner', [function () {
       return {
         restrict: 'AE',
@@ -71,20 +76,199 @@
 
     .directive('scroll', [function () {
 
+      function widthAndHeightCoerce(v) {
+        if (!widthAndHeightValidator(v)) {
+          throw '非法的width或height'
+        }
+
+        if (v[v.length - 1] != '%') return v + 'px'
+        return v
+      }
+
+      function widthAndHeightValidator(v) {
+        return /^[\d]+\%?$/.test(v)
+      }
+
+      function getDelegateId() {
+        return 'vs_' + Math.random().toString(36).substr(3, 8)
+      }
+
       return {
         restrict: 'E',
         transclude: true,
         replace: true,
         scope: {
           onRefresh: '=onRefresh',
-          onInfinite: '=onInfinite'
+          onInfinite: '=onInfinite',
+          width: '=width',
+          height: '=height',
+          delegateId: '=delegateId'
         },
         link: function (scope, element) {
           // todo:
         },
         controller: ['$scope', '$element', function ($scope, $element) {
 
-          // todo:
+          console.log('start!');
+
+          $scope.containerId = Math.random().toString(36).substring(3, 8);
+          $scope.contentId = Math.random().toString(36).substring(3, 8);
+
+          $scope.state = 0; // 0: pull to refresh, 1: release to refresh, 2: refreshing
+          $scope.showLoading = false;
+
+          $scope.refreshText = '下拉刷新';
+
+          var delegateId = getDelegateId();
+          if ($scope.delegateId) {
+            delegateId = $scope.delegateId;
+          }
+
+          $scope.width = $scope.width ? widthAndHeightCoerce($scope.width) : '100%';
+          $scope.height = $scope.height ? widthAndHeightCoerce($scope.height) : '100%';
+
+          var container = undefined;
+          var content = undefined;
+          var scroller = undefined;
+          var pullToRefreshLayer = undefined;
+          var mousedown = false;
+          var infiniteTimer = undefined;
+          var scrollbottom = false;
+
+          function resize() {
+            scroller.setDimensions(container.clientWidth, container.clientHeight, content.offsetWidth, content.offsetHeight);
+          }
+
+          function finishPullToRefresh() {
+            scroller.finishPullToRefresh();
+            setTimeout(resize);
+          }
+
+          function triggerPullToRefresh() {
+            scroller.triggerPullToRefresh();
+          }
+
+          function scrollTo(x, y, animate) {
+            scroller.scrollTo(x, y, animate);
+          }
+
+          function scrollBy(x, y, animate) {
+            scroller.scrollBy(x, y, animate);
+          }
+
+          $scope.touchStart = function (e) {
+            // Don't react if initial down happens on a form element
+            if (e.target.tagName.match(/input|textarea|select/i)) {
+              return;
+            }
+
+            scroller.doTouchStart(e.touches, e.timeStamp);
+          };
+
+          $scope.touchMove = function (e) {
+            e.preventDefault();
+            scroller.doTouchMove(e.touches, e.timeStamp);
+          };
+
+          $scope.touchEnd = function (e) {
+            scroller.doTouchEnd(e.timeStamp);
+          };
+
+          $scope.mouseDown = function (e) {
+            // Don't react if initial down happens on a form element
+            if (e.target.tagName.match(/input|textarea|select/i)) {
+              return;
+            }
+
+            scroller.doTouchStart([{
+              pageX: e.pageX,
+              pageY: e.pageY
+            }], e.timeStamp);
+
+            mousedown = true;
+          };
+
+          $scope.mouseMove = function (e) {
+            if (!mousedown) {
+              return;
+            }
+
+            scroller.doTouchMove([{
+              pageX: e.pageX,
+              pageY: e.pageY
+            }], e.timeStamp);
+
+            mousedown = true;
+          };
+
+          $scope.mouseUp = function (e) {
+            if (!this.mousedown) {
+              return;
+            }
+            this.scroller.doTouchEnd(e.timeStamp);
+            this.mousedown = false;
+          };
+
+          // 初始化
+          function init() {
+            container = document.getElementById($scope.containerId);
+            container.style.width = $scope.width;
+            container.style.height = $scope.height;
+            content = document.getElementById($scope.contentId);
+            pullToRefreshLayer = content.getElementsByTagName("div")[0];
+            var render = getContentRender(content);
+            scroller = new Scroller(render, {
+              scrollingX: false
+            });
+
+            // enable PullToRefresh
+            if ($scope.onRefresh) {
+              scroller.activatePullToRefresh(60, function () {
+                $scope.state = 1;
+              }, function () {
+                $scope.state = 0;
+              }, () => {
+                $scope.state = 2;
+                $scope.$on('$finishPullToRefresh', function () {
+                  setTimeout(function () {
+                    $scope.state = 0;
+                    $scope.finishPullToRefresh()
+                  })
+                });
+                $scope.onRefresh();
+              })
+            }
+
+            // enable infinite loading
+            if ($scope.onInfinite) {
+              infiniteTimer = setInterval(function () {
+                var v = scroller.getValues();
+                if (v.top + 60 > content.offsetHeight - container.clientHeight) {
+                  if (scrollbottom) return;
+                  scrollbottom = true;
+                  $scope.showLoading = true;
+                  $scope.onInfinite();
+                  setTimeout(function () {
+                    scrollbottom = false;
+                  }, 1500)
+                }
+              }, 10);
+            }
+
+            // setup scroller
+            var rect = container.getBoundingClientRect();
+            scroller.setPosition(rect.left + container.clientLeft, rect.top + container.clientTop);
+            var delegate = {
+              resize: resize,
+              finishPullToRefresh: finishPullToRefresh,
+              triggerPullToRefresh: triggerPullToRefresh,
+              scrollTo: scrollTo,
+              scrollBy: scrollBy
+            };
+            window.$scroller.add(delegateId, delegate)
+          }
+
+          init();
 
         }],
         templateUrl: 'templates/scroll.html'

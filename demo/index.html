@@ -16,11 +16,11 @@
     </style>
   </head>
   <body ng-controller="mainController">
-    <scroller>
+    <scroll on-refresh="onRefresh">
       <div class="item" ng-repeat="it in items">
-        {{ it }}
+        <span ng-bind="it"></span>
       </div>
-    </scroller>
+    </scroll>
 
     <script src="../bower_components/angular/angular.min.js" charset="utf-8"></script>
     <script src="../src/module/render.js"></script>

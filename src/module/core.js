@@ -1,4 +1,4 @@
-(function(global) {
+;(function(global) {
   var time = Date.now || function() {
     return +new Date();
   };
