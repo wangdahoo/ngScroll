@@ -6,18 +6,27 @@
     <title>angular-scroll demo</title>
 
     <style>
+      * {
+        box-sizing: border-box;
+      }
+
       .item {
         width: 100%;
-        height: 20px;
-        padding: 5px;
+        height: 50px;
+        padding: 10px;
         text-align: center;
+        font-size: 14px; line-height: 30px;
+      }
+
+      .item.grey-bg {
+        background-color: #eee;
       }
     </style>
 
   </head>
   <body ng-controller="mainController">
     <scroll on-refresh="onRefresh" delegate-id="myScroller">
-      <div class="item" ng-repeat="it in items">
+      <div class="item" ng-repeat="it in items" ng-class="{'grey-bg': $index % 2 == 0}">
         <span ng-bind="it"></span>
       </div>
     </scroll>
