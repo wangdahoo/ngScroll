@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-  .module('demo', [])
+  .module('demo', ['ngScroll'])
 
   .controller('mainController', ['$scope', function ($scope) {
     $scope.items = [];

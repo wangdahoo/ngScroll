@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <title>angular-scroll demo</title>
-
-    <link rel="stylesheet" href="../src/css/scroller.css"/>
+    <script src="../bower_components/angular/angular.min.js" charset="utf-8"></script>
+    <script src="../dist/angular-scroll.js" charset="utf-8"></script>
 
     <style>
       .item {
@@ -16,17 +16,12 @@
     </style>
   </head>
   <body ng-controller="mainController">
-    <scroll on-refresh="onRefresh">
+    <scroll on-refresh="onRefresh" delegate-id="myScroller">
       <div class="item" ng-repeat="it in items">
         <span ng-bind="it"></span>
       </div>
     </scroll>
 
-    <script src="../bower_components/angular/angular.min.js" charset="utf-8"></script>
-    <script src="../src/module/render.js"></script>
-    <script src="../src/module/core.js"></script>
-    <script src="../src/module/accessor.js"></script>
-    <script src="../src/angular-scroll.js" charset="utf-8"></script>
     <script src="index.js" charset="utf-8"></script>
   </body>
 </html>
