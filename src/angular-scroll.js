@@ -75,6 +75,13 @@ angular.module('ngScroll', ['ngTouch'])
     }
   }])
 
+  .directive('arrow', [function () {
+    return {
+      restrict: 'AE',
+      template: Templates['arrow']
+    }
+  }])
+
   .directive('scroll', [function () {
 
     function widthAndHeightCoerce(v) {
@@ -105,11 +112,7 @@ angular.module('ngScroll', ['ngTouch'])
         // height: '=height',
         delegateId: '=delegateId'
       },
-      link: function (scope, element) {
-        console.log('link');
-      },
       controller: ['$scope', '$timeout', function ($scope, $timeout) {
-        console.log('controller');
         $scope.containerId = Math.random().toString(36).substring(3, 8);
         $scope.contentId = Math.random().toString(36).substring(3, 8);
 
@@ -231,7 +234,7 @@ angular.module('ngScroll', ['ngTouch'])
               $scope.$on('$finishPullToRefresh', function () {
                 setTimeout(function () {
                   $scope.state = 0;
-                  $scope.finishPullToRefresh()
+                  finishPullToRefresh()
                 })
               });
               $scope.onRefresh();

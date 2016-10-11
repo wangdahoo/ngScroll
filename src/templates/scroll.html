@@ -9,7 +9,7 @@
     <div ng-if="onRefresh" class="pull-to-refresh-layer"
          ng-class="{'active': state == 1, 'active refreshing': state == 2}">
         <span class="spinner-holder">
-          <img class="arrow" ng-if="state != 2" src="../assets/arrow.svg">
+          <arrow class="arrow" ng-if="state != 2"></arrow>
           <span class="text" ng-if="state != 2">{{ refreshText }}</span>
           <spinner class="spinner" ng-if="state == 2"></spinner>
         </span>
