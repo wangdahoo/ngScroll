@@ -12,7 +12,9 @@
     <div ng-if="onRefresh" class="pull-to-refresh-layer"
          ng-class="{'active': state == 1, 'active refreshing': state == 2}">
         <span class="spinner-holder">
-          <arrow class="arrow" ng-if="state != 2"></arrow>
+          <!--<arrow class="arrow" ng-if="state != 2"></arrow>-->
+          <img class="arrow" ng-if="state != 2"
+            src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDMyLjYzNCAzMi42MzQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDMyLjYzNCAzMi42MzQ7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iMTI4cHgiIGhlaWdodD0iMTI4cHgiPgo8Zz4KCTxwYXRoIGQ9Ik0xNi4zMTcsMzIuNjM0Yy0wLjI3NiwwLTAuNS0wLjIyNC0wLjUtMC41VjAuNWMwLTAuMjc2LDAuMjI0LTAuNSwwLjUtMC41czAuNSwwLjIyNCwwLjUsMC41djMxLjYzNCAgIEMxNi44MTcsMzIuNDEsMTYuNTk0LDMyLjYzNCwxNi4zMTcsMzIuNjM0eiIgZmlsbD0iIzk5OTk5OSIvPgoJPHBhdGggZD0iTTI4Ljg1MiwxMy41MzZjLTAuMTI4LDAtMC4yNTYtMC4wNDktMC4zNTQtMC4xNDZMMTYuMzE5LDEuMjA3TDQuMTM1LDEzLjM5Yy0wLjE5NSwwLjE5NS0wLjUxMiwwLjE5NS0wLjcwNywwICAgcy0wLjE5NS0wLjUxMiwwLTAuNzA3TDE1Ljk2NiwwLjE0NkMxNi4wNTksMC4wNTMsMTYuMTg2LDAsMTYuMzE5LDBsMCwwYzAuMTMzLDAsMC4yNiwwLjA1MywwLjM1NCwwLjE0NmwxMi41MzMsMTIuNTM2ICAgYzAuMTk1LDAuMTk1LDAuMTk1LDAuNTEyLDAsMC43MDdDMjkuMTA4LDEzLjQ4NywyOC45OCwxMy41MzYsMjguODUyLDEzLjUzNnoiIGZpbGw9IiM5OTk5OTkiLz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K" />
           <span class="text" ng-if="state != 2">{{ refreshText }}</span>
           <spinner class="spinner" ng-if="state == 2"></spinner>
         </span>

@@ -2,7 +2,7 @@
   "name": "ng-scroll",
   "version": "1.0.0",
   "description": "",
-  "main": "gulpfile.js",
+  "main": "dist/angular-scroll.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
