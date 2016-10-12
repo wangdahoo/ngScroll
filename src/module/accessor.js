@@ -13,7 +13,8 @@
     if (id in this.scrollers) {
       return this.scrollers[id];
     } else {
-      throw '获取scroller失败, scroller id [' + id + '] 不存在';
+      // throw '获取scroller失败, scroller id [' + id + '] 不存在';
+      return undefined;
     }
   };
 

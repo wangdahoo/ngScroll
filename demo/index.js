@@ -25,7 +25,7 @@ angular
         $scope.items = $scope.items.concat(_items);
         bottom = bottom + n;
       } else {
-        for (i = top + n; i <=  top - 1; i++) {
+        for (i = top + n; i <= top - 1; i++) {
           _items.push(i + ' - keep walking, be 2 with you.');
         }
 
@@ -34,26 +34,23 @@ angular
       }
     }
 
+    $scope.$watch('items', function (newVal, oldVal) {
+      $scope.$broadcast('$finishPullToRefresh');
+      var scroller = $scroller.get('myScroller');
+      if (scroller) scroller.resize();
+    });
+
     $scope.onRefresh = function () {
       $timeout(function () {
         inc(-10);
-        $timeout(function () {
-          $scope.$broadcast('$finishPullToRefresh');
-        });
       }, 2000);
     };
 
     $scope.onInfinite = function () {
       $timeout(function () {
         inc(10);
-        $timeout(function() {
-          $scroller.get('myScroller').resize();
-        });
       }, 2000);
     };
-
-    // call resize after $scope update
-    $timeout(function () { $scroller.get('myScroller').resize() }, 1000);
 
   }])
 ;
