@@ -1,6 +1,6 @@
 {
   "name": "ngScroll",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "smooth scrolling, pull to refresh and infinite loading, for Angular 1.x",
   "main": "dist/angular-scroll.js",
   "scripts": {
@@ -8,14 +8,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/wangdahoo/angular-scroll.git"
+    "url": "https://github.com/wangdahoo/ngScroll.git"
   },
   "author": "wangdahoo <157195705@qq.com>",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/wangdahoo/ng-scroll/issues"
-  },
-  "homepage": "https://github.com/wangdahoo/ng-scroll#readme",
+  "homepage": "https://github.com/wangdahoo/ngScroll#readme",
   "devDependencies": {
     "css-loader": "^0.25.0",
     "exec": "^0.2.1",
