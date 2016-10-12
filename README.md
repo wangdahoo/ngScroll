@@ -1,4 +1,4 @@
-# Angular Scroll Component ![version](https://img.shields.io/badge/release-%20v1.0.0%20-green.svg)
+# Angular Scroll Component ![version](https://img.shields.io/badge/release-%20v1.0.1%20-green.svg)
 
 > smooth scrolling, pull to refresh and infinite loading, for Angular 1.x
 
