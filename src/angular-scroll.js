@@ -268,6 +268,7 @@ angular.module('ngScroll', ['ngTouch'])
             scrollBy: scrollBy
           };
           window.$scroller.add(delegateId, delegate);
+          console.log(delegateId, delegate, window.$scroller);
         }
 
         $timeout(init);

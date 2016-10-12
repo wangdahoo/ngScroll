@@ -25,7 +25,9 @@
 
   </head>
   <body ng-controller="mainController">
-    <scroll on-refresh="onRefresh" delegate-id="myScroller">
+    <scroll on-refresh="onRefresh"
+            on-infinite="onInfinite"
+            delegate-id="'myScroller'">
       <div class="item" ng-repeat="it in items" ng-class="{'grey-bg': $index % 2 == 0}">
         <span ng-bind="it"></span>
       </div>
