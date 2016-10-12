@@ -4,11 +4,12 @@ angular
   .module('demo', ['ngScroll'])
 
   .controller('mainController', ['$scope', '$timeout', function ($scope, $timeout) {
-    $scope.items = [];
-
+    var items = [];
     for (var i = 0; i < 100; i++) {
-      $scope.items.push(i + ' - keep walking, be 2 with you.')
+      items.push(i + ' - keep walking, be 2 with you.')
     }
+
+    $scope.items = items;
 
     var top = 0;
     var bottom = 100;
@@ -41,8 +42,8 @@ angular
     };
 
     $scope.onInfinite = function () {
-      inc(10);
       $timeout(function () {
+        inc(10);
         $scroller.get('myScroller').resize();
       }, 2000);
     };

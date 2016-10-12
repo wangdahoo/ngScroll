@@ -191,6 +191,7 @@ angular.module('ngScroll', ['ngTouch'])
         };
 
         $scope.mouseMove = function (e) {
+          e.preventDefault();
           if (!mousedown) {
             return;
           }
@@ -204,11 +205,11 @@ angular.module('ngScroll', ['ngTouch'])
         };
 
         $scope.mouseUp = function (e) {
-          if (!this.mousedown) {
+          if (!mousedown) {
             return;
           }
-          this.scroller.doTouchEnd(e.timeStamp);
-          this.mousedown = false;
+          scroller.doTouchEnd(e.timeStamp);
+          mousedown = false;
         };
 
         // 初始化
@@ -268,7 +269,7 @@ angular.module('ngScroll', ['ngTouch'])
             scrollBy: scrollBy
           };
           window.$scroller.add(delegateId, delegate);
-          console.log(delegateId, delegate, window.$scroller);
+          // console.log(delegateId, delegate, window.$scroller);
         }
 
         $timeout(init);
@@ -276,7 +277,10 @@ angular.module('ngScroll', ['ngTouch'])
         $scope.$on('$destroy', function () {
           if (infiniteTimer)
             clearInterval(infiniteTimer);
-        })
+
+          window.$scroller.del(delegateId)
+        });
+
       }],
       template: Templates['scroll']
     }
