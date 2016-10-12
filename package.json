@@ -1,5 +1,5 @@
 {
-  "name": "ng-scroll",
+  "name": "ngScroll",
   "version": "1.0.0",
   "description": "smooth scrolling, pull to refresh and infinite loading, for Angular 1.x",
   "main": "dist/angular-scroll.js",
@@ -27,5 +27,16 @@
     "underscore": "^1.8.3",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.2"
-  }
+  },
+  "keywords": [
+    "angular",
+    "scroll",
+    "angular-scroll",
+    "ng-scroll",
+    "ngScroll",
+    "pulltorefresh",
+    "pull to refresh",
+    "pull-to-refresh",
+    "infinite loading"
+  ]
 }
