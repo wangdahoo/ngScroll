@@ -65,8 +65,7 @@ angular.module('ngTouch', [])
   })
 ;
 
-/* ngScroll */
-angular.module('ngScroll', ['ngTouch'])
+angular.module('svg', [])
 
   .directive('spinner', [function () {
     return {
@@ -81,6 +80,10 @@ angular.module('ngScroll', ['ngTouch'])
       template: Templates['arrow']
     }
   }])
+;
+
+/* ngScroll */
+angular.module('ngScroll', ['ngTouch', 'svg'])
 
   .directive('scroll', [function () {
 
@@ -89,7 +92,7 @@ angular.module('ngScroll', ['ngTouch'])
         throw '非法的width或height'
       }
 
-      if (v[v.length - 1] != '%') return v + 'px'
+      if (v[v.length - 1] != '%') return v + 'px';
       return v
     }
 
@@ -250,6 +253,7 @@ angular.module('ngScroll', ['ngTouch'])
                 if (scrollbottom) return;
                 scrollbottom = true;
                 $scope.showLoading = true;
+                $scope.$digest();
                 $scope.onInfinite();
                 setTimeout(function () {
                   scrollbottom = false;

@@ -1,3 +1,5 @@
+var webpack = require('webpack');
+
 module.exports = {
   entry: "./src/angular-scroll.js",
   output: {
@@ -19,6 +21,16 @@ module.exports = {
   },
 
   plugins: [
-
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"production"'
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    }),
+    new webpack.optimize.OccurenceOrderPlugin()
   ]
 };

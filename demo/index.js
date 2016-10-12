@@ -5,14 +5,14 @@ angular
 
   .controller('mainController', ['$scope', '$timeout', function ($scope, $timeout) {
     var items = [];
-    for (var i = 0; i < 100; i++) {
+    for (var i = 0; i < 20; i++) {
       items.push(i + ' - keep walking, be 2 with you.')
     }
 
     $scope.items = items;
 
     var top = 0;
-    var bottom = 100;
+    var bottom = 20;
 
     function inc(n) {
       var _items = [];
@@ -37,14 +37,18 @@ angular
     $scope.onRefresh = function () {
       $timeout(function () {
         inc(-10);
-        $scope.$broadcast('$finishPullToRefresh');
+        $timeout(function () {
+          $scope.$broadcast('$finishPullToRefresh');
+        });
       }, 2000);
     };
 
     $scope.onInfinite = function () {
       $timeout(function () {
         inc(10);
-        $scroller.get('myScroller').resize();
+        $timeout(function() {
+          $scroller.get('myScroller').resize();
+        });
       }, 2000);
     };
 
