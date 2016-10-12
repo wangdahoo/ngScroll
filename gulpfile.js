@@ -65,3 +65,29 @@ gulp.task('watch', function () {
   // build
   gulp.watch('src/**/*.*', ['build']);
 });
+
+
+/* docs */
+var replace = require('gulp-replace');
+
+gulp.task('docs:clean', function() {
+  return gulp.src('docs/', {read: false})
+    .pipe(clean());
+});
+
+gulp.task('docs:copy', ['docs:clean'], function () {
+  return gulp.src([
+    'demo/index.js',
+    'bower_components/angular/angular.min.js',
+    'bower_components/angular/angular.min.js.map',
+    'dist/angular-scroll.js'
+  ])
+    .pipe(gulp.dest('docs/'));
+});
+
+gulp.task('docs', ['docs:copy'], function () {
+  return gulp.src('demo/index.html')
+    .pipe(replace('../bower_components/angular/angular.min.js', 'angular.min.js'))
+    .pipe(replace('../dist/angular-scroll.js', 'angular-scroll.js'))
+    .pipe(gulp.dest('docs/'));
+});
