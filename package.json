@@ -1,6 +1,6 @@
 {
   "name": "ngScroll",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "smooth scrolling, pull to refresh and infinite loading, for Angular 1.x",
   "main": "dist/angular-scroll.js",
   "scripts": {

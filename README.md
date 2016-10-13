@@ -1,9 +1,9 @@
-# Angular Scroll Component ![version](https://img.shields.io/badge/release-%20v1.0.1%20-green.svg)
+# Angular Scroll Component ![version](https://img.shields.io/badge/release-%20v1.0.2%20-green.svg)
 
 > smooth scrolling, pull to refresh and infinite loading, for Angular 1.x
 
 ## Demo
-> see sample code in folder /demo. And checkout demo [here](https://wangdahoo.github.io/angular-scroll/)
+> see sample code in folder /demo. And checkout demo [here](https://wangdahoo.github.io/ngScroll/)
 
 ## Quick Start
 ```html
